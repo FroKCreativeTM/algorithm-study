@@ -17,7 +17,8 @@ class Solution:
             while graph[a] : 
                 dfs(graph[a].pop(0))
             result.append(a)
-            
+
+        # 중요한 점은 JFK에서 출발한다.    
         dfs("JFK")
         
         # 다시 뒤집어서 어휘 순으로 출력
