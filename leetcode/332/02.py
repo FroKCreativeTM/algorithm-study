@@ -6,7 +6,8 @@ class Solution:
         
         # 그래프에 행선지를 넣는다.
         # 이 때 sorted를 이용하면 딱 한 번만 정렬해도 결과가 동일하다.
-        for a, b  in sorted(tickets) : 
+        # 만약 여기서 역순으로 정렬하면, 뒤에서 앞부터 꺼낼 필요가 없다. 
+        for a, b  in sorted(tickets, reverse = True) : 
             graph[a].append(b)
         
         result = []
@@ -15,11 +16,10 @@ class Solution:
         def dfs(a) : 
             # 첫번째 값을 읽어서 어휘 순으로 방문한다.
             while graph[a] : 
-                # 맨 앞의 요소를 꺼내는 경우 O(n)이다.
-                dfs(graph[a].pop(0))
+                # 위에서 역순으로 정렬해서 O(1)로 최적화되었다.
+                dfs(graph[a].pop())
             result.append(a)
-
-        # 중요한 점은 JFK에서 출발한다.    
+            
         dfs("JFK")
         
         # 다시 뒤집어서 어휘 순으로 출력
