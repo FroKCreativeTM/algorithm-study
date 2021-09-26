@@ -7,11 +7,11 @@ arr = []
 for i in range(N) : 
     arr.append(int(sys.stdin.readline()))
 
-print(round(sum(arr) / N))
-print(arr[N // 2])
-
 arr.sort()
 tmp = Counter(arr).most_common()
+
+print(round(sum(arr) / N))
+print(arr[N // 2])
 
 if len(arr) > 1 : 
     if tmp[0][1] == tmp[1][1] : 
