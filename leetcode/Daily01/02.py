@@ -2,7 +2,7 @@
 # @param version, an integer
 # @return an integer
 # def isBadVersion(version):
-## https://leetcode.com/problems/first-bad-version/submissions/
+## https://leetcode.com/problems/first-bad-version/
 
 class Solution:
     def firstBadVersion(self, n):
