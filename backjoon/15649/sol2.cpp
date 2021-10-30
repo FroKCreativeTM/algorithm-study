@@ -5,7 +5,7 @@ using namespace std;
 
 int N, M;
 
-int v[8];
+int v[9];
 bool visited[9];
 
 void dfs(int cnt) {
@@ -15,7 +15,7 @@ void dfs(int cnt) {
             /* code */
             cout << v[i] << " ";
         }
-        cout << endl;
+        cout << "\n";
         return;        
     }
 

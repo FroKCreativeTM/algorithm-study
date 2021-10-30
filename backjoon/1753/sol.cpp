@@ -27,7 +27,6 @@ void dijkstra(int start) {
         pq.pop();
 
         if(mc[cur] < dist) continue;
-
         for(int i = 0; i < vec[cur].size(); ++i) {
             // 선택된 노드의 인접 노드
             int next = vec[cur][i].first;
