@@ -26,7 +26,7 @@ void comb(int cnt, int cur){
                 }
             }
         }
-        answer = min(ans, abs(a-b));
+        answer = min(answer, abs(a-b));
     }
     for(int i = 0; i < N; i++){
         if(visited[i] == false && i > cur){
