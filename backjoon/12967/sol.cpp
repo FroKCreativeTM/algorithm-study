@@ -3,6 +3,7 @@
 
 using namespace std;
 
+/* 현재 문제, 오버플로우 */
 long long N, K;
 vector<long long> vec;
 int cnt = 0;
