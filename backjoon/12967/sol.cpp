@@ -1,23 +1,56 @@
 #include <iostream>
 #include <vector>
+#include <map>
+#include <algorithm>
 
 using namespace std;
 
-/* 현재 문제, 오버플로우 */
-long long N, K;
-vector<long long> vec;
+typedef long long int ll;
+
+ll N, K;
+map<ll, ll> dic;
+vector<pair<ll, ll>> v;
 int cnt = 0;
 
-void solve() {
-    for(int p = 0; p < vec.size() - 2; ++p) {
-        for(int q = 1; q < vec.size() - 1; ++q) {
-            for(int r = 2; r < vec.size(); ++r) {
-                if(p == q || q == r || r == p) {
-                    continue;
-                }
+ll gcd(ll a, ll b) {
+    if (b == 0) {
+        return a;
+    }
+    gcd(b, a % b);
+}
 
-                if((vec[p] * vec[q] * vec[r]) % K == 0) {
-                    cnt++;
+void solve() {
+    for (auto it : dic) {
+        v.push_back(it);
+    }
+
+    for (int i = 0; i < v.size(); i++) {
+        if (v[i].first *
+            v[i].first *
+            v[i].first % K == 0
+            && v[i].second >= 3) {
+            cnt += (v[i].second - 2) * (v[i].second - 1) * (v[i].second) / 6;
+        }
+    }
+
+    for (int i = 0; i < v.size(); i++) {
+        for (int j = i + 1; j < v.size(); j++) {
+            if (v[i].first * v[i].first * v[j].first % K == 0
+                && v[i].second >= 2) {
+                cnt += (v[i].second - 1) * (v[i].second) * (v[j].second) / 2;
+            }
+
+            if (v[j].first * v[j].first * v[i].first % K == 0 && v[j].second >= 2) {
+                cnt += (v[j].second - 1) * (v[j].second) * (v[i].second) / 2;
+            }
+        }
+    }
+
+    for (int i = 0; i < v.size(); i++) {
+        for (int j = i + 1; j < v.size(); j++) {
+            for (int k = j + 1; k < v.size(); k++) {
+                if (v[i].first * v[j].first * v[k].first % K == 0) {
+                    cnt += v[i].second * v[j].second * v[k].second;
                 }
             }
         }
@@ -30,15 +63,21 @@ int main() {
     cout.tie(nullptr);
 
     cin >> N >> K;
-    
+
     for (int i = 0; i < N; ++i)
     {
-        long long tmp;
+        ll tmp;
         cin >> tmp;
-        vec.push_back(tmp);
+
+        ll k = gcd(tmp, K);
+
+        if (dic.find(k) == dic.end()) dic[k] = 0;
+        dic[k]++;
     }
-    
+
     solve();
 
     cout << cnt << endl;
+
+    return 0;
 }
